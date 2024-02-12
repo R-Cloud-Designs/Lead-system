@@ -1,0 +1,23 @@
+<main class="leads-page">
+  <section class="lead-banner">
+    <h1 class="banner-title">Welcome to Lead System</h1>
+    <p class="banner-subtitle">Your smart solution for managing leads efficiently.</p>
+  </section>
+
+  <section class="lead-list">
+    <div class="list-header">
+      <h2 class="header-title">Latest Leads</h2>
+      <div class="btn-action-group">
+        <button class="btn btn-primary" (click)="openLeadModal()">Add Lead</button>
+        <button class="btn btn-danger" (click)="deleteSelectedLeads()">Delete Selected</button>
+      </div>
+    </div>
+    <app-leads-table
+      [leads]="leads"
+      [selectedLeads]="selectedLeads"
+      (editLead)="editLead($event)"
+      (deleteLead)="deleteSelectedLeads()"
+      (selectLead)="selectLead($event)"
+    />
+  </section>
+</main>

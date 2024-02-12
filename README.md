@@ -1,27 +1,55 @@
-# Leadsystem
+# Lead Management System - README
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
+## Introduction
 
-## Development server
+The Lead Management System is a simple web application tailored for businesses to manage and track their leads and their respective orders. It features a sleek Angular front-end that interacts with a SurrealDB backend, providing a seamless user experience for lead and order management.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Environment Variables
 
-## Code scaffolding
+To connect the application to the database, set up the following environment variables:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+DB_URL=         // Database URL
+DB_NAMESPACE=   // Namespace for logical data separation
+DB_DATABASE=    // Database name
+DB_USERNAME=    // Username for database authentication
+DB_PASSWORD=    // Password for database authentication
+```
 
-## Build
+## Core Libraries and Technologies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular**: Robust front-end framework for building dynamic and reactive interfaces.
+- **SurrealDB**: Innovative NoSQL database that offers real-time capabilities.
+- **RxJS**: Powerful library for composing asynchronous and event-based programs by using observable sequences.
+- **SCSS**: Syntactically Awesome Style Sheets, a CSS preprocessor that adds power and elegance to the basic language.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript and adds type safety to the development process.
+- **Zod** - A TypeScript-first schema declaration and validation library.
 
-## Running unit tests
+## Project Timeline
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The project setup and initial implementation were allocated 16 hours, ensuring a robust foundation and streamlined workflow.
 
-## Running end-to-end tests
+## Hosting
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The Angular application and the SurrealDB instance are hosted on DigitalOcean, providing a reliable and scalable cloud platform.
 
-## Further help
+- DigitalOcean App Platform: [Link to Angular app](link1) - Coming soon
+- DigitalOcean Database Cluster: [Link to SurrealDB instance](link2) - Coming soon
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## SurrealDB and Zod setup
+
+The choice of SurrealDB was driven by its real-time capabilities and ease of use. For more information and documentation on how to set up and use SurrealDB, visit their official website:
+Zod is a TypeScript-first schema declaration and validation library. It was chosen for its ease of use and its ability to provide a clear and concise way to define the shape of the data. For more information and documentation on how to set up and use Zod, visit their official website:
+
+- [SurrealDB Documentation](https://surrealist.starlane.studio/)
+- [Zod Documentation](https://zod.dev/)
+
+## Project Setup
+
+To get the application up and running on your local machine:
+
+1. Clone the repository.
+2. Set up the required environment variables.
+3. Run `npm install` to install dependencies.
+4. Use `ng serve` to start the development server.
+5. Visit `http://localhost:4200/` in your browser.

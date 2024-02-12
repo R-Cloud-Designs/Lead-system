@@ -1,0 +1,89 @@
+<div class="table-responsive">
+  <table class="leads-table">
+    <thead class="table-head">
+      <tr class="table-row">
+        <th class="table-header">Select</th>
+        <th class="table-header" *ngFor="let field of editableFields">{{ field | titlecase }}</th>
+        <th class="table-header">Orders</th>
+        <th class="table-header">Created At</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr
+        *ngFor="let lead of paginatedLeads$ | async; trackBy: trackByLeadId"
+        [ngClass]="{
+          selected: selectedLeads.includes(lead),
+          lost: lead.status === 'lost' && !selectedLeads.includes(lead),
+          qualified: lead.status === 'qualified' && !selectedLeads.includes(lead),
+          new: lead.status === 'new' && !selectedLeads.includes(lead),
+          contacted: lead.status === 'contacted' && !selectedLeads.includes(lead)
+        }"
+        class="table-row"
+      >
+        <td class="table-cell center">
+          <input
+            type="checkbox"
+            [checked]="selectedLeads.includes(lead)"
+            (change)="toggleSelectLead(lead.id)"
+            (keydown.enter)="toggleSelectLead(lead.id)"
+            class="select-checkbox"
+            tabindex="0"
+          />
+        </td>
+        <ng-container *ngFor="let field of editableFields">
+          <td
+            class="table-cell editable"
+            *ngIf="field !== 'status'"
+            [attr.contenteditable]="editingLeadId === lead.id && editingField === field"
+            (blur)="saveEdit(lead, field, $event)"
+            (click)="startEditing(lead.id, field)"
+            (keydown)="handleKeydown($event, lead, field)"
+            tabindex="0"
+          >
+            {{ lead[field] }}
+          </td>
+        </ng-container>
+        <td class="table-cell" tabindex="0">
+          <select
+            name="update-status"
+            class="edit-select"
+            [(ngModel)]="lead.status"
+            (blur)="saveEdit(lead, 'status', $event)"
+            (change)="saveEdit(lead, 'status', $event)"
+          >
+            <option *ngFor="let option of statusOptions; trackBy: trackByStatus" [value]="option">
+              {{ transformStatusTitle(option) }}
+            </option>
+          </select>
+        </td>
+        <td
+          class="table-cell center no-padding"
+          tabindex="0"
+          (click)="openOrderHistoryModal(lead)"
+          (keydown.enter)="openOrderHistoryModal(lead)"
+        >
+          <a class="btn btn-cell">{{ lead.orderHistory?.length || 0 }}</a>
+        </td>
+        <td class="table-cell" tabindex="0">{{ lead.createdAt | date : "mediumDate" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination-controls">
+    <button
+      class="pagination-btn"
+      (click)="paginationService.prevPage()"
+      [disabled]="!(paginationService.hasPrevPage$ | async)"
+    >
+      Previous
+    </button>
+    <span class="pagination-info">Page {{ currentPage$ | async }} of {{ totalPages$ | async }}</span>
+    <button
+      class="pagination-btn"
+      (click)="paginationService.nextPage()"
+      [disabled]="!(paginationService.hasNextPage$ | async)"
+    >
+      Next
+    </button>
+  </div>
+</div>

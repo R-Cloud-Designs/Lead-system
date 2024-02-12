@@ -1,0 +1,62 @@
+<ng-container *ngIf="lead && lead.orderHistory">
+  <div class="accordion">
+    <div class="accordion-item" *ngFor="let order of lead.orderHistory; let i = index">
+      <input type="checkbox" [id]="'toggle-' + order.orderId" class="toggle" hidden />
+
+      <label [for]="'toggle-' + order.orderId" class="accordion-header">
+        <div class="header-left">
+          <img
+            *ngIf="order.products && order.products.length > 0"
+            [src]="order.products[0].url"
+            [alt]="order.products[0].name"
+            class="product-image"
+          />
+
+          <div class="order-details">
+            <div class="order-id">Order ID: {{ order.orderId }}</div>
+            <div class="order-status" [ngClass]="order.status">{{ order.status | titlecase }}</div>
+          </div>
+        </div>
+      </label>
+
+      <div class="accordion-content" [ngClass]="{ active: activeIndex === i }">
+        <div class="order-summary">
+          <div class="order-info">
+            <div class="order-from">
+              <strong>Ordered from:</strong>
+              <a href="{{ order.storeUrl }}" target="_blank">{{ order.storeName | titlecase }}</a>
+            </div>
+            <div class="order-courier">
+              <strong>Courier:</strong> {{ order.courierName }} <span>{{ order.trackingNumber }}</span>
+            </div>
+            <div class="order-address"><strong>Delivery Address:</strong> {{ order.deliveryAddress | titlecase }}</div>
+            <div class="order-items">
+              <strong>Items:</strong>
+              <ul>
+                <li *ngFor="let products of order.products">{{ products.name | titlecase }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="order-tracking-container">
+            <div class="order-timeline">
+              <div *ngFor="let step of order.trackingSteps; let i = index" class="timeline-item">
+                <div class="timeline-marker" [ngClass]="{ active: step.active, canceled: step.canceled }"></div>
+                <div class="timeline-content">
+                  <div class="status">{{ step.status | titlecase }}</div>
+                  <div class="date">{{ step.timestamp | date : "longDate" }}</div>
+                  <div class="time">{{ step.timestamp | date : "shortTime" }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="contact-courier">Contact Courier</button>
+            <button class="export-details">Export Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

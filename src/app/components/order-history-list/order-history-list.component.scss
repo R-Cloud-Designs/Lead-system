@@ -1,0 +1,263 @@
+$primary-color: #0056b3;
+$background-color: #ffffff;
+$border-color: #cccccc;
+$text-color: #333333;
+$link-color: #004095;
+$hover-color: #e6e6e6;
+$light-red: rgba(255, 59, 48, 0.5);
+$light-green: rgba(52, 199, 89, 0.5);
+$light-blue: rgba(0, 122, 255, 0.5);
+$light-yellow: rgba(255, 214, 10, 0.5);
+$light-orange: rgba(255, 149, 0, 0.5);
+$placeholder-color: #d1d1d1;
+
+$transition-duration: 0.3s;
+$transition-ease: ease;
+
+$timeline-active-color: #007bff;
+$timeline-canceled-color: #ff0000;
+
+.accordion {
+  width: 100%;
+  background-color: $background-color;
+  transition: all $transition-duration $transition-ease;
+
+  .accordion-item {
+    border-top: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .toggle {
+      &:not(:checked) ~ .accordion-content {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10%);
+        padding: 0 15px;
+        visibility: hidden;
+      }
+
+      &:checked ~ .accordion-header {
+        background-color: $hover-color;
+      }
+
+      &:checked ~ .accordion-content {
+        max-height: 1000px;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 15px;
+        visibility: visible;
+        transition: all 0.3s ease, visibility 0s 0.3s;
+      }
+    }
+
+    .accordion-header {
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 500;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $background-color;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      padding: 18px;
+      margin: 0;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+
+        .product-image {
+          width: 60px;
+          height: 60px;
+          border-radius: 5px;
+          object-fit: cover;
+          margin-right: 15px;
+          background: $placeholder-color;
+        }
+
+        .order-details {
+          .order-id {
+            display: block;
+            color: $text-color;
+            font-weight: bold;
+          }
+
+          .order-status {
+            font-size: 14px;
+            color: $light-green;
+            margin-top: 4px;
+            padding: 4px 8px;
+            border-radius: 15px;
+            text-transform: capitalize;
+            background-color: #e8f5e9;
+            display: inline-block;
+
+            &.pending {
+              background-color: $light-yellow;
+              color: darken($light-yellow, 50%);
+            }
+            &.shipped,
+            &.delivered {
+              background-color: $light-green;
+              color: darken($light-green, 50%);
+            }
+
+            &.canceled {
+              background-color: $light-red;
+              color: darken($light-red, 50%);
+            }
+          }
+        }
+      }
+
+      .toggle-icon {
+        background-image: url("data:image/svg+xml;utf8,<svg ...></svg>");
+        width: 24px;
+        height: 24px;
+        transition: transform 0.25s ease;
+      }
+    }
+
+    .accordion-content {
+      overflow: hidden;
+      transition: all 0.5s ease, visibility 0s 0.5s;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 8px;
+
+      .order-summary {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+
+        .order-info {
+          padding: 15px;
+          border-radius: 8px;
+
+          .order-from,
+          .order-courier,
+          .order-address,
+          .order-items {
+            margin-bottom: 10px;
+          }
+
+          strong {
+            color: $text-color;
+            font-weight: bold;
+          }
+
+          a {
+            color: $link-color;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          ul {
+            padding-left: 20px;
+            list-style-type: disc;
+          }
+        }
+
+        .order-tracking-container {
+          display: flex;
+          flex-direction: column;
+
+          .order-timeline {
+            position: relative;
+            margin: 20px 0;
+
+            .timeline-item {
+              display: flex;
+              align-items: center;
+              position: relative;
+
+              .timeline-marker {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: $placeholder-color;
+                position: absolute;
+                left: 0;
+
+                &.active {
+                  background: $timeline-active-color;
+                }
+
+                &.canceled {
+                  background: $timeline-canceled-color;
+                }
+              }
+
+              .timeline-content {
+                margin-left: 35px;
+                padding: 10px;
+                border-left: 2px solid #ccc;
+
+                .status {
+                  font-weight: bold;
+
+                  &.active {
+                    color: $timeline-active-color;
+                  }
+
+                  &.canceled {
+                    color: $timeline-canceled-color;
+                  }
+                }
+
+                .date,
+                .time {
+                  font-size: 0.9em;
+                  color: #666;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          background-color: $primary-color;
+          color: white;
+          cursor: pointer;
+        }
+
+        .contact-courier {
+          background-color: orangered;
+          &:hover {
+            background-color: darken(orangered, 10%);
+          }
+        }
+
+        .export-details {
+          background-color: orange;
+
+          &:hover {
+            background-color: darken(orange, 10%);
+          }
+        }
+      }
+    }
+  }
+}

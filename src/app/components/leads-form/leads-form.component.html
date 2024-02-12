@@ -1,0 +1,74 @@
+<form [formGroup]="leadFormGroup" (submit)="onSubmit()" class="leads-form" novalidate>
+  <h1>Add Lead</h1>
+
+  <div class="form-group">
+    <label for="lead-name" class="form-label">Name</label>
+    <input
+      type="text"
+      id="lead-name"
+      formControlName="name"
+      class="form-control"
+      [class.is-invalid]="formControls['name'].invalid && formControls['name'].touched"
+    />
+    <div *ngIf="formControls['name'].invalid && formControls['name'].touched" class="error">
+      <div *ngIf="formControls['name'].errors?.['required']">Name is required.</div>
+      <div *ngIf="formControls['name'].errors?.['minlength']">Name must be at least 3 characters long.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lead-email" class="form-label">Email</label>
+    <input
+      type="email"
+      id="lead-email"
+      formControlName="email"
+      class="form-control"
+      [class.is-invalid]="formControls['email'].invalid && formControls['email'].touched"
+    />
+    <div *ngIf="formControls['email'].invalid && formControls['email'].touched" class="error">
+      <div *ngIf="formControls['email'].errors?.['required']">Email is required.</div>
+      <div *ngIf="formControls['email'].errors?.['pattern']">Email is invalid.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lead-address" class="form-label">Address</label>
+    <input
+      type="address"
+      id="lead-address"
+      formControlName="address"
+      class="form-control"
+      [class.is-invalid]="formControls['address'].invalid && formControls['address'].touched"
+    />
+    <div *ngIf="formControls['address'].invalid && formControls['address'].touched" class="error">
+      <div *ngIf="formControls['address'].errors?.['required']">address is required.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lead-phone" class="form-label">Phone Number</label>
+    <input
+      type="tel"
+      id="lead-phone"
+      formControlName="phone"
+      class="form-control"
+      [class.is-invalid]="formControls['phone'].invalid && formControls['phone'].touched"
+    />
+    <div *ngIf="formControls['phone'].invalid && formControls['phone'].touched" class="error">
+      <div *ngIf="formControls['phone'].errors?.['required']">Phone number is required.</div>
+      <div *ngIf="formControls['email'].errors?.['pattern']">Phone number is invalid.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lead-status" class="form-label">Status</label>
+    <select id="lead-status" formControlName="status" class="form-control">
+      <option value="new">New</option>
+      <option value="contacted">Contacted</option>
+      <option value="qualified">Qualified</option>
+      <option value="lost">Lost</option>
+    </select>
+  </div>
+
+  <button type="submit" class="form-submit-btn" [disabled]="leadFormGroup.invalid">Submit</button>
+</form>
