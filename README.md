@@ -33,8 +33,8 @@ The project setup and initial implementation were allocated 16 hours, ensuring a
 
 The Angular application and the SurrealDB instance are hosted on DigitalOcean, providing a reliable and scalable cloud platform.
 
-- DigitalOcean App Platform: [Link to Deployed App](https://dolphin-app-3ajtf.ondigitalocean.app/dashboard) - Coming soon
-- DigitalOcean Database Cluster: [Link to SurrealDB instance](https://lionfish-app-tkzl5.ondigitalocean.app/) - Coming soon
+- DigitalOcean App Platform:  [Link to Dolphin App](https://dolphin-app-3ajtf.ondigitalocean.app/)
+- DigitalOcean Database Cluster: [Link to SurrealDB instance](https://lionfish-app-tkzl5.ondigitalocean.app/)
 
 ## SurrealDB and Zod setup
 
